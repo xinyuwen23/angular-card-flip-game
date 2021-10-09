@@ -1,0 +1,12 @@
+<header>
+  <h4>{{ title }}</h4>
+  <p>{{ message }}</p>
+  <h6>Flips: {{ flipCounter }}</h6>
+  <button mat-flat-button color="primary" (click)="reset()">Reset Game</button>
+</header>
+
+<section>
+  <div *ngFor="let card of cards">
+    <app-card [card]="card" (clickCard)="flip($event)"></app-card>
+  </div>
+</section>
