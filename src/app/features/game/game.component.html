@@ -1,8 +1,7 @@
 <header>
-  <h4>{{ title }}</h4>
+  <button mat-flat-button color="warn" (click)="reset()">Restart</button>
   <p>{{ message }}</p>
-  <h6>Flips: {{ flipCounter }}</h6>
-  <button mat-flat-button color="primary" (click)="reset()">Reset Game</button>
+  <p>Flips: {{ flipCounter }}</p>
 </header>
 
 <section>

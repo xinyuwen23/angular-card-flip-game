@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { Card } from './card';
-import { CARDS } from './cardset';
+import { Card } from './interfaces/card';
+import { CARDS } from './data/cards';
 
 @Component({
   selector: 'app-game',
@@ -9,20 +9,19 @@ import { CARDS } from './cardset';
   styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit, OnDestroy {
-  title = 'CARD FLIP GAME';
   initCards: Card[] = CARDS.map((card) => ({
     ...card,
     flipped: false,
     matched: false,
   }));
-  cards: Card[] = [];
-  flipping: Card[] = [];
+  cards!: Card[];
+  flipping!: Card[];
   matching = new Subject<Card[]>(); // temp store cards being flipped
   matchingSubscription!: Subscription;
   flippedCounter!: number;
   flipCounter!: number;
   messageSubject = new Subject<string>();
-  message = '';
+  message!: string;
 
   ngOnInit() {
     this.handleInitCards();
@@ -32,6 +31,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.messageSubject.subscribe((message) => (this.message = message));
     this.flipCounter = 0;
     this.flippedCounter = 0;
+    this.flipping = [];
     this.messageSubject.next('Game begins');
   }
 

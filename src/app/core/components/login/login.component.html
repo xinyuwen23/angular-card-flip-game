@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Log In</h1>
+<div class="content" mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput required />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput type="password" required />
+  </mat-form-field>
+</div>
+<div class="actions" mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="openRegisterDialog()">
+    To Register
+  </button>
+  <button mat-button cdkFocusInitial>Log In</button>
+</div>

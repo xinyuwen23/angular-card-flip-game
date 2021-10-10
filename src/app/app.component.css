@@ -1,4 +1,9 @@
+app-header {
+  position: relative;
+}
+
 main {
   width: 100%;
-  height: calc(100% - 100px);
+  min-height: calc(100% - 60px);
+  padding-top: 50px;
 }
