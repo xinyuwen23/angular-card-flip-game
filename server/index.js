@@ -14,7 +14,6 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-
 app.use("/user", userRouter);
 
 app.listen(PORT, () => {

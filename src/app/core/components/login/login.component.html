@@ -2,18 +2,21 @@
 <div class="content" mat-dialog-content [formGroup]="loginForm">
   <mat-form-field>
     <mat-label>Email</mat-label>
-    <input matInput formControlName="email" required />
+    <input matInput formControlName="email" required (keyup.enter)="login()" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Password</mat-label>
-    <input matInput type="password" formControlName="password" required />
+    <input
+      matInput
+      type="password"
+      formControlName="password"
+      required
+      (keyup.enter)="login()"
+    />
   </mat-form-field>
 </div>
 <div class="actions" mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="openRegisterDialog()">
-    To Register
-  </button>
-  <button mat-button cdkFocusInitial mat-dialog-close (click)="login()">
+  <button mat-flat-button color="primary" mat-dialog-close (click)="login()">
     Log In
   </button>
 </div>

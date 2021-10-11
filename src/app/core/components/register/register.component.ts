@@ -19,10 +19,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openLoginDialog() {
-    this.auth.openLoginDialog();
-  }
-
   register() {
     this.auth
       .register(this.registerForm.value)

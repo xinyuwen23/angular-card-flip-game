@@ -26,6 +26,10 @@ export class AuthService {
     this.dialog.open(RegisterComponent);
   }
 
+  getUser(): Observable<any> {
+    return this.http.get('http://localhost:4000/user/get');
+  }
+
   login(user: any): Observable<any> {
     return this.http.post<any>(
       'http://localhost:4000/user/login',

@@ -1,9 +1,10 @@
-section.message {
+section.info {
   width: 100%;
   height: 50px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: flex-end;
 }
 
 section.main {
@@ -20,4 +21,8 @@ section.restart {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+p.message {
+  color: blue;
 }
