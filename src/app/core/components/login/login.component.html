@@ -1,17 +1,17 @@
 <h1 mat-dialog-title>Log In</h1>
-<div class="content" mat-dialog-content>
+<div class="content" mat-dialog-content [formGroup]="LoginForm">
   <mat-form-field>
     <mat-label>Email</mat-label>
-    <input matInput required />
+    <input matInput formControlName="email" required />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Password</mat-label>
-    <input matInput type="password" required />
+    <input matInput type="password" formControlName="password" required />
   </mat-form-field>
 </div>
 <div class="actions" mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="openRegisterDialog()">
     To Register
   </button>
-  <button mat-button cdkFocusInitial>Log In</button>
+  <button mat-button cdkFocusInitial (click)="login()">Log In</button>
 </div>

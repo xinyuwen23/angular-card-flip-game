@@ -4,6 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule],
 })
 export class ServicesModule {}

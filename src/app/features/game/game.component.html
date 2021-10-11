@@ -1,11 +1,14 @@
-<header>
-  <button mat-flat-button color="warn" (click)="reset()">Restart</button>
+<section class="message">
   <p>{{ message }}</p>
   <p>Flips: {{ flipCounter }}</p>
-</header>
+</section>
 
-<section>
+<section class="main">
   <div *ngFor="let card of cards">
     <app-card [card]="card" (clickCard)="flip($event)"></app-card>
   </div>
+</section>
+
+<section class="restart">
+  <button mat-flat-button color="warn" (click)="reset()">Restart</button>
 </section>

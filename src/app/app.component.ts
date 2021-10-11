@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { UserResponse } from './core/interfaces/userResponse';
 import { AuthService } from './core/services/auth.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userSubscribtion = this.auth
       .getUser()
-      .subscribe((user) => this.auth.user$.next(user));
+      .subscribe((data: UserResponse) => this.auth.user$.next(data.user));
   }
 
   ngOnDestroy() {
