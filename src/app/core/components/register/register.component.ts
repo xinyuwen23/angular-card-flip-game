@@ -8,11 +8,24 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  constructor(private auth: AuthService) {}
+  registerForm: FormGroup = this.fb.group({
+    name: '',
+    email: '',
+    password: '',
+    password2: '',
+  });
+
+  constructor(public auth: AuthService, private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 
   openLoginDialog() {
     this.auth.openLoginDialog();
+  }
+
+  register() {
+    this.auth
+      .register(this.registerForm.value)
+      .subscribe((data) => (this.auth.user = data.user));
   }
 }

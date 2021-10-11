@@ -8,12 +8,12 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  LoginForm: FormGroup = this.fb.group({
+  loginForm: FormGroup = this.fb.group({
     email: '',
     password: '',
   });
 
-  constructor(private auth: AuthService, private fb: FormBuilder) {}
+  constructor(public auth: AuthService, private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 
@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.auth.login(this.LoginForm.value);
+    this.auth
+      .login(this.loginForm.value)
+      .subscribe((data) => (this.auth.user = data.user));
   }
 }

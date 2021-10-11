@@ -9,19 +9,9 @@ const md5Password = (password) => {
   return utils.md5(utils.md5(password + salt));
 };
 
-router.get("/list", (req, res) => {
+router.get("/all", (req, res) => {
   User.find({}, (err, users) => {
     return res.json({ code: 0, users });
-  });
-});
-
-router.get("/get_user", (req, res) => {
-  const { _id } = req.cookies;
-  if (!_id) {
-    return res.json({ code: 1 });
-  }
-  User.findOne({ _id }, (err, user) => {
-    return res.json({ code: 0, user });
   });
 });
 
@@ -33,38 +23,26 @@ router.post("/login", (req, res) => {
         code: 1,
       });
     }
-    res.cookie("_id", user._id);
     return res.json({ code: 0, user });
   });
 });
 
-// router.post("/register", (req, res) => {
-//   const { email, name, password, isSeller } = req.body;
-//   User.findOne({ email }, (err, doc) => {
-//     if (doc) {
-//       return res.json({ code: 1, message: "Email already exists" });
-//     }
-//     const user = new User({
-//       email,
-//       name,
-//       password: md5Password(password),
-//       isSeller,
-//     });
-//     user.save((err, doc) => {
-//       const cart = new Cart({ user, price: 0, quantity: 0, items: [] });
-//       cart.save((err, cart) => {
-//         const { email, name, isSeller, _id } = doc;
-//         const { user, price, quantity, items } = cart;
-//         res.cookie("_id", _id);
-//         return res.json({
-//           code: 0,
-//           user: { email, name, isSeller, _id },
-//           cart: { user, price, quantity, items },
-//           message: `Welcome, ${name}`,
-//         });
-//       });
-//     });
-//   });
-// });
+router.post("/register", (req, res) => {
+  const { email, name, password } = req.body;
+  User.findOne({ email }, (err, doc) => {
+    if (doc) {
+      return res.json({ code: 1 });
+    }
+    const user = new User({
+      email,
+      name,
+      password: md5Password(password),
+      isAdmin: false,
+    });
+    user.save((err, user) => {
+      return res.json({ code: 0, user });
+    });
+  });
+});
 
 module.exports = router;

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../interfaces/user';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -8,13 +7,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  user?: User;
+  constructor(public auth: AuthService) {}
 
-  constructor(private auth: AuthService) {}
-
-  ngOnInit(): void {
-    this.auth.user$.subscribe((user) => (this.user = user));
-  }
+  ngOnInit(): void {}
 
   openLoginDialog() {
     this.auth.openLoginDialog();
