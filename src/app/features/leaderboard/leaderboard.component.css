@@ -27,6 +27,6 @@ section.unauth {
   align-items: center;
 }
 
-button {
-  width: 100px;
+mat-button-toggle {
+  width: 60px;
 }
