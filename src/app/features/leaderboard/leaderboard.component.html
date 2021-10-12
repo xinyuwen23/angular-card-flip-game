@@ -1,30 +1,42 @@
-<!-- <section class="leaderboard" *ngIf="auth.user"> -->
-<section class="leaderboard">
-  <table mat-table [dataSource]="lb.allRecords" class="mat-elevation-z8">
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef>No.</th>
-      <td mat-cell *matCellDef="let element">{{ element.position }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="user">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.user.username }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="flips">
-      <th mat-header-cell *matHeaderCellDef>Flips</th>
-      <td mat-cell *matCellDef="let element">{{ element.flips }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef>Date</th>
-      <td mat-cell *matCellDef="let element">{{ element.date | date }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+<ng-container *ngIf="auth.user">
+  <header>
+    <mat-button-toggle-group [(ngModel)]="button">
+      <mat-button-toggle value="1">All</mat-button-toggle>
+      <mat-button-toggle value="2">You</mat-button-toggle>
+    </mat-button-toggle-group>
+  </header>
+  <section class="leaderboard">
+    <table
+      mat-table
+      [dataSource]="button === '1' ? lb.allRecords : lb.userRecords"
+      class="mat-elevation-z8"
+    >
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+      </ng-container>
+      <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef>User</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.user.username | uppercase }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="flips">
+        <th mat-header-cell *matHeaderCellDef>Flips</th>
+        <td mat-cell *matCellDef="let element">{{ element.flips }}</td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.createdAt | date }}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </section>
+</ng-container>
+<section class="unauth" *ngIf="!auth.user">
+  <h1>Leaderboard</h1>
+  <h3>You need to log in</h3>
 </section>
-<!-- <section class="unauth" *ngIf="!auth.user">
-  <h1>You need to log in</h1>
-</section> -->

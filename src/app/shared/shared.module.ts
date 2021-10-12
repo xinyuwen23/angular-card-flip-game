@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 const materialModules = [
   MatButtonModule,
@@ -25,6 +26,6 @@ const materialModules = [
 @NgModule({
   declarations: [],
   imports: [CommonModule],
-  exports: [...materialModules, HttpClientModule],
+  exports: [...materialModules, HttpClientModule, FormsModule],
 })
 export class SharedModule {}
