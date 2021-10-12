@@ -13,21 +13,6 @@ export class AppComponent implements OnInit {
   constructor(private auth: AuthService, private lb: LeaderboardService) {}
 
   ngOnInit(): void {
-    this.getAllRecords();
-    this.getUserRecord();
-  }
-
-  getUserRecord() {
-    if (this.auth.user) {
-      this.lb
-        .getUserRecords()
-        .subscribe((data) => (this.lb.userRecords = data.records));
-    }
-  }
-
-  getAllRecords() {
-    this.lb
-      .getAllRecords()
-      .subscribe((data) => (this.lb.allRecords = data.records));
+    this.lb.subscribeRecords();
   }
 }

@@ -23,24 +23,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
-    this.auth.login(this.loginForm.value).subscribe((data) => {
+    this.auth.login$(this.loginForm.value).subscribe((data) => {
       this.auth.user = data.user;
-      this.getAllRecords();
-      this.getUserRecord();
+      this.lb.subscribeRecords();
     });
-  }
-
-  getUserRecord() {
-    if (this.auth.user) {
-      this.lb
-        .getUserRecords()
-        .subscribe((data) => (this.lb.userRecords = data.records));
-    }
-  }
-
-  getAllRecords() {
-    this.lb
-      .getAllRecords()
-      .subscribe((data) => (this.lb.allRecords = data.records));
   }
 }

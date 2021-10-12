@@ -29,4 +29,21 @@ export class LeaderboardService {
   getAllRecords(): Observable<any> {
     return this.http.get([environment.baseUrl, 'record/all'].join('/'));
   }
+
+  subscribeRecords() {
+    this.subscribeAllRecords();
+    this.subscribeUserRecords();
+  }
+
+  subscribeUserRecords() {
+    if (this.auth.user) {
+      this.getUserRecords().subscribe(
+        (data) => (this.userRecords = data.records)
+      );
+    }
+  }
+
+  subscribeAllRecords() {
+    this.getAllRecords().subscribe((data) => (this.allRecords = data.records));
+  }
 }

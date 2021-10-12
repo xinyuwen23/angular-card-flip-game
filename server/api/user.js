@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const utils = require("utility");
+const fs = require("fs");
 
 const User = require("../models").User;
+
+const RSA_PRIVATE_KEY = fs.readFileSync('../private.key');
 
 const md5Password = (password) => {
   const salt = "xkzrbCTPWeaV5z4p8mpxPpxyqVU7uq1l";
@@ -17,7 +20,18 @@ router.post("/login", (req, res) => {
         code: 1,
       });
     }
-    return res.json({ code: 0, user: doc });
+    const userId = doc._id;
+    const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
+      algorithm: "RS256",
+      expiresIn: 120,
+      subject: userId,
+    });
+    return res.json({
+      code: 0,
+      user: doc,
+      idToken: jwtBearerToken,
+      expiresIn: 120,
+    });
   });
 });
 

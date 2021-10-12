@@ -19,22 +19,7 @@ export class UploadComponent implements OnInit {
 
   upload() {
     this.game.upload().subscribe((_) => {
-      this.getUserRecord();
-      this.getAllRecords();
+      this.lb.subscribeRecords();
     });
-  }
-
-  getUserRecord() {
-    if (this.auth.user) {
-      this.lb
-        .getUserRecords()
-        .subscribe((data) => (this.lb.userRecords = data.records));
-    }
-  }
-
-  getAllRecords() {
-    this.lb
-      .getAllRecords()
-      .subscribe((data) => (this.lb.allRecords = data.records));
   }
 }
