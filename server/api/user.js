@@ -9,38 +9,31 @@ const md5Password = (password) => {
   return utils.md5(utils.md5(password + salt));
 };
 
-router.get("/all", (req, res) => {
-  User.find({}, (err, users) => {
-    return res.json({ code: 0, users });
-  });
-});
-
 router.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  User.findOne({ email, password: md5Password(password) }, (err, user) => {
-    if (!user) {
+  const { username, password } = req.body;
+  User.findOne({ username, password: md5Password(password) }, (err, doc) => {
+    if (!doc) {
       return res.json({
         code: 1,
       });
     }
-    return res.json({ code: 0, user });
+    return res.json({ code: 0, user: doc });
   });
 });
 
 router.post("/register", (req, res) => {
-  const { email, name, password } = req.body;
-  User.findOne({ email }, (err, doc) => {
+  const { username, password } = req.body;
+  User.findOne({ username }, (err, doc) => {
     if (doc) {
       return res.json({ code: 1 });
     }
     const user = new User({
-      email,
-      name,
+      username,
       password: md5Password(password),
       isAdmin: false,
     });
-    user.save((err, user) => {
-      return res.json({ code: 0, user });
+    user.save((err, doc) => {
+      return res.json({ code: 0, user: doc });
     });
   });
 });

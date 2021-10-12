@@ -9,10 +9,9 @@ mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const userSchema = new Schema(
   {
-    email: { type: String, required: true, unique: true },
-    name: { type: String, required: true },
-    password: { type: String, required: true },
-    isAdmin: { type: Boolean, default: false, required: true },
+    username: { type: String },
+    password: { type: String },
+    isAdmin: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
@@ -20,11 +19,13 @@ const userSchema = new Schema(
 const recordSchema = new Schema(
   {
     user: { type: Schema.Types.ObjectId, ref: "user" },
-    flips: { type: Number, required: true },
+    flips: { type: Number },
   },
   { timestamps: true }
 );
 
 const User = mongoose.model("user", userSchema);
+const Record = mongoose.model("record", recordSchema);
 
 exports.User = User;
+exports.Record = Record;

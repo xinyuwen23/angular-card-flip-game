@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = this.fb.group({
-    email: '',
+    username: '',
     password: '',
   });
 

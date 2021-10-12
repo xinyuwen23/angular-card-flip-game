@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { Card } from './interfaces/card';
 import { CARDS } from './data/cards';
+import { GameService } from 'src/app/core/services/game.service';
 
 @Component({
   selector: 'app-game',
@@ -22,6 +23,8 @@ export class GameComponent implements OnInit, OnDestroy {
   flipCounter!: number;
   messageSubject = new Subject<string>();
   message!: string;
+
+  constructor(private game: GameService) {}
 
   ngOnInit() {
     this.handleInitCards();
@@ -84,6 +87,8 @@ export class GameComponent implements OnInit, OnDestroy {
       }, 600);
       if (this.flippedCounter >= this.cards.length) {
         this.messageSubject.next('Congratulations!');
+        this.game.flips = this.flipCounter;
+        this.game.openUploadDialog();
       }
     } else {
       this.messageSubject.next('NOT a match');

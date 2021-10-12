@@ -1,8 +1,13 @@
 <h1 mat-dialog-title>Log In</h1>
 <div class="content" mat-dialog-content [formGroup]="loginForm">
   <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" required (keyup.enter)="login()" />
+    <mat-label>Username</mat-label>
+    <input
+      matInput
+      formControlName="username"
+      required
+      (keyup.enter)="login()"
+    />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Password</mat-label>

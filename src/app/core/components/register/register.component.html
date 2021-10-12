@@ -1,19 +1,10 @@
 <h1 mat-dialog-title>Register</h1>
 <div class="content" mat-dialog-content [formGroup]="registerForm">
   <mat-form-field>
-    <mat-label>Your Name</mat-label>
+    <mat-label>Username</mat-label>
     <input
       matInput
-      formControlName="name"
-      required
-      (keyup.enter)="register()"
-    />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input
-      matInput
-      formControlName="email"
+      formControlName="username"
       required
       (keyup.enter)="register()"
     />

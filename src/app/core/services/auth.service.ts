@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from '../components/register/register.component';
 
@@ -26,13 +27,9 @@ export class AuthService {
     this.dialog.open(RegisterComponent);
   }
 
-  getUser(): Observable<any> {
-    return this.http.get('http://localhost:4000/user/get');
-  }
-
   login(user: any): Observable<any> {
-    return this.http.post<any>(
-      'http://localhost:4000/user/login',
+    return this.http.post(
+      [environment.baseUrl, 'user/login'].join('/'),
       user,
       this.httpOptions
     );
@@ -40,12 +37,11 @@ export class AuthService {
 
   register(user: any): Observable<any> {
     const newUser = {
-      name: user.name,
-      email: user.email,
+      username: user.username,
       password: user.password,
     };
-    return this.http.post<any>(
-      'http://localhost:4000/user/register',
+    return this.http.post(
+      [environment.baseUrl, 'user/register'].join('/'),
       newUser,
       this.httpOptions
     );

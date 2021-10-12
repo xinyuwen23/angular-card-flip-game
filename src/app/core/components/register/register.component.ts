@@ -9,8 +9,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup = this.fb.group({
-    name: '',
-    email: '',
+    username: '',
     password: '',
     password2: '',
   });
@@ -20,6 +19,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   register() {
+    console.log(this.registerForm.value);
     this.auth
       .register(this.registerForm.value)
       .subscribe((data) => (this.auth.user = data.user));

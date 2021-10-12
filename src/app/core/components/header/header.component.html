@@ -16,7 +16,7 @@
   </section>
   <section class="right" *ngIf="auth.user">
     <button mat-button color="primary" [matMenuTriggerFor]="menu">
-      Welcome, {{ auth.user.name }}
+      Welcome, {{ auth.user.username | uppercase }}
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item routerLink="/profile">Profile</button>
