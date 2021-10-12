@@ -1,0 +1,6 @@
+<section class="leaderboard" *ngIf="auth.user">
+  <main class=''>Here you go</main>
+</section>
+<section class="unauth" *ngIf="!auth.user">
+  <h1>You need to log in</h1>
+</section>

@@ -3,6 +3,7 @@ import { Subject, Subscription } from 'rxjs';
 import { Card } from './interfaces/card';
 import { CARDS } from './data/cards';
 import { GameService } from 'src/app/core/services/game.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-game',
@@ -24,7 +25,7 @@ export class GameComponent implements OnInit, OnDestroy {
   messageSubject = new Subject<string>();
   message!: string;
 
-  constructor(private game: GameService) {}
+  constructor(private game: GameService, public auth: AuthService) {}
 
   ngOnInit() {
     this.handleInitCards();

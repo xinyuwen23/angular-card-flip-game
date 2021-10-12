@@ -1,14 +1,17 @@
-<section class="info">
-  <p class="message">{{ message }}</p>
-  <p>Flips: {{ flipCounter }}</p>
-</section>
-
-<section class="main">
-  <div *ngFor="let card of cards">
-    <app-card [card]="card" (clickCard)="flip($event)"></app-card>
-  </div>
-</section>
-
-<section class="restart">
-  <button mat-flat-button color="accent" (click)="reset()">Restart</button>
+<ng-container *ngIf="auth.user">
+  <section class="info">
+    <p class="message">{{ message }}</p>
+    <p>Flips: {{ flipCounter }}</p>
+  </section>
+  <section class="main">
+    <div *ngFor="let card of cards">
+      <app-card [card]="card" (clickCard)="flip($event)"></app-card>
+    </div>
+  </section>
+  <section class="restart">
+    <button mat-flat-button color="accent" (click)="reset()">Restart</button>
+  </section>
+</ng-container>
+<section class="unauth" *ngIf="!auth.user">
+  <h1>You need to log in</h1>
 </section>

@@ -14,6 +14,13 @@ const routes: Routes = [
       import('./features/game/game.module').then((m) => m.GameModule),
   },
   {
+    path: 'leaderboard',
+    loadChildren: () =>
+      import('./features/leaderboard/leaderboard.module').then(
+        (m) => m.LeaderboardModule
+      ),
+  },
+  {
     path: '**',
     component: PageNotFoundComponent,
   },

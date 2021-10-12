@@ -12,6 +12,6 @@ export class UploadComponent implements OnInit {
   ngOnInit(): void {}
 
   upload() {
-    this.game.upload().subscribe((data) => console.log(data));
+    this.game.upload().subscribe((_) => console.log('Record submitted'));
   }
 }
