@@ -1,13 +1,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
-const app = express();
-
-const PORT = process.env.PORT || 4000;
+const jwt = require("jsonwebtoken");
 
 const userRouter = require("./api/user");
 const recordRouter = require("./api/record");
+
+const PORT = process.env.PORT || 4000;
+
+const app = express();
 
 app.use(
   cors({
