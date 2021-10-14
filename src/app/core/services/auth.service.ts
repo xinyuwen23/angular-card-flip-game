@@ -21,9 +21,9 @@ export class AuthService {
 
   constructor(
     private dialog: MatDialog,
-    private http: HttpClient,
-    private lb: LeaderboardService
-  ) {}
+    private http: HttpClient
+  ) // private lb: LeaderboardService
+  {}
 
   openLoginDialog() {
     this.dialog.open(LoginComponent);
@@ -41,15 +41,7 @@ export class AuthService {
     );
   }
 
-  login(user: any) {
-    this.login$(user).subscribe((data) => {
-      this.user = data.user;
-      this.setSession(data);
-      this.lb.subscribeRecords();
-    });
-  }
-
-  register(user: any): Observable<any> {
+  register$(user: any): Observable<any> {
     const newUser = {
       username: user.username,
       password: user.password,

@@ -2,10 +2,17 @@ const express = require("express");
 const router = express.Router();
 const utils = require("utility");
 const fs = require("fs");
+const jwt = require("jsonwebtoken");
+const expressJwt = require("express-jwt");
 
 const User = require("../models").User;
 
-const RSA_PRIVATE_KEY = fs.readFileSync('../private.key');
+const RSA_PRIVATE_KEY = fs.readFileSync("./server/private.key");
+const RSA_PUBLIC_KEY = fs.readFileSync("./server/public.key");
+
+const checkIfAuthenticated = expressJwt({
+  secret: RSA_PUBLIC_KEY,
+});
 
 const md5Password = (password) => {
   const salt = "xkzrbCTPWeaV5z4p8mpxPpxyqVU7uq1l";
