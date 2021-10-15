@@ -18,6 +18,12 @@ app.use(bodyParser.json());
 app.use("/user", userRouter);
 app.use("/record", recordRouter);
 
+app.use((err, req, res, next) => {
+  if (err.name === "UnauthorizedError") {
+    return res.json({ code: 1, message: "invalid token" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`);
 });

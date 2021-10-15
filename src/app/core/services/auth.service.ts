@@ -6,7 +6,6 @@ import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from '../components/register/register.component';
-import { LeaderboardService } from './leaderboard.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,10 +18,7 @@ export class AuthService {
   };
   user: any;
 
-  constructor(
-    private dialog: MatDialog,
-    private http: HttpClient // private lb: LeaderboardService
-  ) {}
+  constructor(private dialog: MatDialog, private http: HttpClient) {}
 
   openLoginDialog() {
     this.dialog.open(LoginComponent);
