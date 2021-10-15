@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -21,6 +22,7 @@ const materialModules = [
   MatMenuModule,
   MatTableModule,
   MatButtonToggleModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

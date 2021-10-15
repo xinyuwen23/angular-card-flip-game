@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
       console.log(data.user);
       this.auth.user$.next(data.user);
       this.auth.setSession(data);
-      this.lb.subscribeRecords(data.user._id);
     });
   }
 }

@@ -8,10 +8,21 @@ import { LeaderboardService } from 'src/app/core/services/leaderboard.service';
   styleUrls: ['./leaderboard.component.css'],
 })
 export class LeaderboardComponent implements OnInit {
+  allRecords: any;
+  userRecords: any;
   displayedColumns = ['position', 'user', 'flips', 'date'];
   button = '1';
 
-  constructor(public lb: LeaderboardService) {}
+  constructor(private auth: AuthService, private lb: LeaderboardService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.lb.getAllRecords().subscribe((data) => {
+      this.lb.allRecords$.next(data.records);
+      this.allRecords = this.lb.allRecords$.getValue();
+    });
+    this.lb
+      .getUserRecords(this.auth.user$.getValue()?._id)
+      .subscribe((data) => this.lb.userRecords$.next(data.records));
+    this.userRecords = this.lb.userRecords$.getValue();
+  }
 }

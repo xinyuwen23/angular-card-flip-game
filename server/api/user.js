@@ -47,7 +47,8 @@ function getUser(req, res) {
   if (!token) return res.json({ code: 1 });
   const userId = jwt.verify(token, RSA_PUBLIC_KEY).sub;
   User.findOne({ _id: userId }, (err, doc) => {
-    return res.json({ code: 0, user: doc });
+    const { _id, username, isAdmin } = doc;
+    return res.json({ code: 0, user: { _id, username, isAdmin } });
   });
 }
 
@@ -64,9 +65,10 @@ function login(req, res) {
     }
     const userId = doc._id.toString();
     const jwtBearerToken = createJwtToken(userId);
+    const { _id, username, isAdmin } = doc;
     return res.json({
       code: 0,
-      user: doc,
+      user: { _id, username, isAdmin },
       idToken: jwtBearerToken,
       expiresIn: EXPIRESIN,
     });
@@ -87,9 +89,10 @@ router.post("/register", (req, res) => {
     user.save((err, doc) => {
       const userId = doc._id.toString();
       const jwtBearerToken = createJwtToken(userId);
+      const { _id, username, isAdmin } = doc;
       return res.json({
         code: 0,
-        user: doc,
+        user: { _id, username, isAdmin },
         idToken: jwtBearerToken,
         expiresIn: EXPIRESIN,
       });

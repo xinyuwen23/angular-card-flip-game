@@ -18,15 +18,6 @@ table {
   width: 500px;
 }
 
-section.unauth {
-  width: 100%;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 mat-button-toggle {
   width: 60px;
 }

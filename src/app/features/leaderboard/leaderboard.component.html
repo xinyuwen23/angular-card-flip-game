@@ -7,7 +7,7 @@
 <section class="leaderboard">
   <table
     mat-table
-    [dataSource]="button === '1' ? lb.allRecords : lb.userRecords"
+    [dataSource]="button === '1' ? allRecords : userRecords"
     class="mat-elevation-z8"
   >
     <ng-container matColumnDef="position">
@@ -34,8 +34,3 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </section>
-
-<!-- <section class="unauth" *ngIf="!auth.user">
-  <h1>Leaderboard</h1>
-  <h3>You need to log in</h3>
-</section> -->

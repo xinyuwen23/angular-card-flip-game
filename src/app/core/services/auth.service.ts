@@ -6,12 +6,13 @@ import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from '../components/register/register.component';
+import { User } from 'src/app/shared/interfaces/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  user$ = new BehaviorSubject(undefined);
+  user$ = new BehaviorSubject<User | undefined>(undefined);
 
   constructor(private dialog: MatDialog, private http: HttpClient) {}
 
@@ -43,7 +44,7 @@ export class AuthService {
   }
 
   logout() {
-    this.user$.next(undefined)
+    this.user$.next(undefined);
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
   }

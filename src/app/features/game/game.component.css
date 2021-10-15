@@ -26,12 +26,3 @@ section.restart {
 p.message {
   color: blue;
 }
-
-section.unauth {
-  width: 100%;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}

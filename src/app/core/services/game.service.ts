@@ -12,11 +12,7 @@ import { AuthService } from './auth.service';
 export class GameService {
   flips?: number;
 
-  constructor(
-    private http: HttpClient,
-    private dialog: MatDialog,
-    private auth: AuthService
-  ) {}
+  constructor(private http: HttpClient, private dialog: MatDialog) {}
 
   openUploadDialog() {
     this.dialog.open(UploadComponent);
