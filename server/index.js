@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
 
 const userRouter = require("./api/user");
 const recordRouter = require("./api/record");

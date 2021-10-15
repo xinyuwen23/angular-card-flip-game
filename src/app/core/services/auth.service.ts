@@ -21,9 +21,8 @@ export class AuthService {
 
   constructor(
     private dialog: MatDialog,
-    private http: HttpClient
-  ) // private lb: LeaderboardService
-  {}
+    private http: HttpClient // private lb: LeaderboardService
+  ) {}
 
   openLoginDialog() {
     this.dialog.open(LoginComponent);
@@ -31,6 +30,10 @@ export class AuthService {
 
   openRegisterDialog() {
     this.dialog.open(RegisterComponent);
+  }
+
+  getUser$(): Observable<any> {
+    return this.http.get([environment.baseUrl, 'user/get'].join('/'));
   }
 
   login$(user: any): Observable<any> {

@@ -12,12 +12,32 @@ const RSA_PUBLIC_KEY = fs.readFileSync("./server/public.key");
 
 const checkIfAuthenticated = expressJwt({
   secret: RSA_PUBLIC_KEY,
+  algorithms: ["RS256"],
 });
 
 const md5Password = (password) => {
   const salt = "xkzrbCTPWeaV5z4p8mpxPpxyqVU7uq1l";
   return utils.md5(utils.md5(password + salt));
 };
+
+router.get("/get", checkIfAuthenticated, (req, res) => {
+  // if (!_id) {
+  //   return res.json({ code: 1 });
+  // }
+  // User.findOne({ _id }, (err, doc) => {
+  //   return res.json({ code: 0, user: doc });
+  // });
+
+  const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
+    algorithm: "RS256",
+    expiresIn: 120,
+  });
+  return res.json({
+    code: 0,
+    idToken: jwtBearerToken,
+    expiresIn: 120,
+  });
+});
 
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
@@ -27,7 +47,7 @@ router.post("/login", (req, res) => {
         code: 1,
       });
     }
-    const userId = doc._id;
+    const userId = doc._id.toString();
     const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
       algorithm: "RS256",
       expiresIn: 120,

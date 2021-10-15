@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.auth.login$(this.loginForm.value).subscribe((data) => {
       this.auth.user = data.user;
+      this.auth.setSession(data);
       this.lb.subscribeRecords();
     });
   }
