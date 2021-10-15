@@ -9,9 +9,9 @@ import { LeaderboardService } from 'src/app/core/services/leaderboard.service';
 })
 export class LeaderboardComponent implements OnInit {
   displayedColumns = ['position', 'user', 'flips', 'date'];
-  button = '1'
+  button = '1';
 
-  constructor(public auth: AuthService, public lb: LeaderboardService) {}
+  constructor(public lb: LeaderboardService) {}
 
   ngOnInit(): void {}
 }

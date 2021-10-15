@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { LeaderboardService } from '../../services/leaderboard.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,20 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(public auth: AuthService) {}
+  user?: any;
 
-  ngOnInit(): void {}
+  constructor(private auth: AuthService, private lb: LeaderboardService) {}
+
+  ngOnInit(): void {
+    this.auth
+      .getUser$()
+      .subscribe((data) => this.auth.user$.next(data.user))
+      .add(
+        this.auth.user$
+          .subscribe((user) => (this.user = user))
+          .add(this.lb.subscribeRecords(this.user && this.user._id))
+      );
+  }
 
   openLoginDialog() {
     this.auth.openLoginDialog();
@@ -17,5 +29,9 @@ export class HeaderComponent implements OnInit {
 
   openRegisterDialog() {
     this.auth.openRegisterDialog();
+  }
+
+  logout() {
+    this.auth.logout();
   }
 }

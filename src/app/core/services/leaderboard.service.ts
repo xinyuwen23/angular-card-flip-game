@@ -13,9 +13,9 @@ export class LeaderboardService {
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  getUserRecords(): Observable<any> {
+  getUserRecords(userId: any): Observable<any> {
     return this.http.post([environment.baseUrl, 'record/user'].join('/'), {
-      _id: this.auth.user._id,
+      _id: userId,
     });
   }
 
@@ -23,13 +23,13 @@ export class LeaderboardService {
     return this.http.get([environment.baseUrl, 'record/all'].join('/'));
   }
 
-  subscribeRecords() {
+  subscribeRecords(userId:any) {
     this.subscribeAllRecords();
-    this.subscribeUserRecords();
+    this.subscribeUserRecords(userId);
   }
 
-  subscribeUserRecords() {
-    return this.getUserRecords().subscribe(
+  subscribeUserRecords(userId:any) {
+    return this.getUserRecords(userId).subscribe(
       (data) => (this.userRecords = data.records)
     );
   }

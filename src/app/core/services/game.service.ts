@@ -22,9 +22,9 @@ export class GameService {
     this.dialog.open(UploadComponent);
   }
 
-  upload(): Observable<any> {
+  upload$(userId: any): Observable<any> {
     return this.http.post([environment.baseUrl, 'record/upload'].join('/'), {
-      _id: this.auth.user._id,
+      _id: userId,
       flips: this.flips,
     });
   }

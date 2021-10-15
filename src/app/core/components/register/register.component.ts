@@ -14,13 +14,13 @@ export class RegisterComponent implements OnInit {
     password2: '',
   });
 
-  constructor(public auth: AuthService, private fb: FormBuilder) {}
+  constructor(private auth: AuthService, private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 
   register() {
     this.auth
       .register$(this.registerForm.value)
-      .subscribe((data) => (this.auth.user = data.user));
+      .subscribe((data) => this.auth.user$.next(data.user));
   }
 }

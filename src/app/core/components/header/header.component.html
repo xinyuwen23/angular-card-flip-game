@@ -6,7 +6,7 @@
       Leaderboard
     </button>
   </section>
-  <section class="right" *ngIf="!auth.user">
+  <section class="right" *ngIf="!user">
     <button mat-button color="primary" (click)="openRegisterDialog()">
       Register
     </button>
@@ -14,13 +14,13 @@
       Login
     </button>
   </section>
-  <section class="right" *ngIf="auth.user">
+  <section class="right" *ngIf="user">
     <button mat-button color="primary" [matMenuTriggerFor]="menu">
-      Welcome, {{ auth.user.username | uppercase }}
+      Welcome, {{ user.username | uppercase }}
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item routerLink="/profile">Profile</button>
-      <button mat-menu-item (click)="auth.logout()">Logout</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
   </section>
 </header>

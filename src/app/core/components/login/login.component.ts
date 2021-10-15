@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
-    public auth: AuthService,
+    private auth: AuthService,
     private fb: FormBuilder,
     private lb: LeaderboardService
   ) {}
@@ -24,9 +24,10 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.auth.login$(this.loginForm.value).subscribe((data) => {
-      this.auth.user = data.user;
+      console.log(data.user);
+      this.auth.user$.next(data.user);
       this.auth.setSession(data);
-      this.lb.subscribeRecords();
+      this.lb.subscribeRecords(data.user._id);
     });
   }
 }

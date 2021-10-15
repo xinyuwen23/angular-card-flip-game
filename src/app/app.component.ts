@@ -1,19 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from './core/services/auth.service';
-import { LeaderboardService } from './core/services/leaderboard.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'angular-card-flip-game';
 
-  constructor(private auth: AuthService, private lb: LeaderboardService) {}
-
-  ngOnInit(): void {
-    this.auth.getUser$().subscribe((data) => (this.auth.user = data.user));
-    this.lb.subscribeAllRecords();
-  }
+  constructor() {}
 }

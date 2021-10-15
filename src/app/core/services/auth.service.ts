@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from '../components/login/login.component';
@@ -11,7 +11,7 @@ import { RegisterComponent } from '../components/register/register.component';
   providedIn: 'root',
 })
 export class AuthService {
-  user: any;
+  user$ = new BehaviorSubject(undefined);
 
   constructor(private dialog: MatDialog, private http: HttpClient) {}
 
@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   logout() {
-    this.user = undefined;
+    this.user$.next(undefined)
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
   }
