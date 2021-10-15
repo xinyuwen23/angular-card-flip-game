@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -11,11 +11,6 @@ import { RegisterComponent } from '../components/register/register.component';
   providedIn: 'root',
 })
 export class AuthService {
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    }),
-  };
   user: any;
 
   constructor(private dialog: MatDialog, private http: HttpClient) {}
@@ -33,11 +28,7 @@ export class AuthService {
   }
 
   login$(user: any): Observable<any> {
-    return this.http.post(
-      [environment.baseUrl, 'user/login'].join('/'),
-      user,
-      this.httpOptions
-    );
+    return this.http.post([environment.baseUrl, 'user/login'].join('/'), user);
   }
 
   register$(user: any): Observable<any> {
@@ -47,8 +38,7 @@ export class AuthService {
     };
     return this.http.post(
       [environment.baseUrl, 'user/register'].join('/'),
-      newUser,
-      this.httpOptions
+      newUser
     );
   }
 

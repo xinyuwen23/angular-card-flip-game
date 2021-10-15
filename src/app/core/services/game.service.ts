@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -10,11 +10,6 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class GameService {
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    }),
-  };
   flips?: number;
 
   constructor(
@@ -28,10 +23,9 @@ export class GameService {
   }
 
   upload(): Observable<any> {
-    return this.http.post(
-      [environment.baseUrl, 'record/upload'].join('/'),
-      { _id: this.auth.user._id, flips: this.flips },
-      this.httpOptions
-    );
+    return this.http.post([environment.baseUrl, 'record/upload'].join('/'), {
+      _id: this.auth.user._id,
+      flips: this.flips,
+    });
   }
 }
