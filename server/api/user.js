@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
 
 const User = require("../models").User;
+const Record = require("../models").Record;
 
 const RSA_PRIVATE_KEY = fs.readFileSync("./server/private.key");
 const RSA_PUBLIC_KEY = fs.readFileSync("./server/public.key");
@@ -40,9 +41,7 @@ function createJwtToken(userId) {
   });
 }
 
-router.get("/get", checkIfAuthenticated, getUser);
-
-function getUser(req, res) {
+router.get("/get", checkIfAuthenticated, (req, res) => {
   const token = getToken(req);
   if (!token) return res.json({ code: 1 });
   const userId = jwt.verify(token, RSA_PUBLIC_KEY).sub;
@@ -50,11 +49,9 @@ function getUser(req, res) {
     const { _id, username, isAdmin } = doc;
     return res.json({ code: 0, user: { _id, username, isAdmin } });
   });
-}
+});
 
-router.post("/login", login);
-
-function login(req, res) {
+router.post("/login", (req, res) => {
   const { username, password } = req.body;
   User.findOne({ username, password: md5Password(password) }, (err, doc) => {
     if (!doc) {
@@ -73,7 +70,7 @@ function login(req, res) {
       expiresIn: EXPIRESIN,
     });
   });
-}
+});
 
 router.post("/register", (req, res) => {
   const { username, password } = req.body;
@@ -96,6 +93,35 @@ router.post("/register", (req, res) => {
         idToken: jwtBearerToken,
         expiresIn: EXPIRESIN,
       });
+    });
+  });
+});
+
+router.get("/all", (req, res) => {
+  User.find({}, (err, doc) => {
+    return res.json({ code: 0, users: doc });
+  });
+});
+
+router.put("/update", (req, res) => {
+  const { _id, username, password } = req.body;
+  User.findOneAndUpdate(
+    { _id },
+    { username, password: md5Password(password) },
+    (err, doc) => {
+      if (!doc) {
+        return res.json({ code: 1 });
+      }
+      return res.json({ code: 0 });
+    }
+  );
+});
+
+router.delete("/delete", (req, res) => {
+  const { _id } = req.body;
+  User.findOneAndDelete({ _id }, (err, doc) => {
+    Record.deleteMany({ user: _id }, (err, doc) => {
+      return res.json({ code: 0 });
     });
   });
 });
