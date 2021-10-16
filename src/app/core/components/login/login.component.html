@@ -21,7 +21,13 @@
   </mat-form-field>
 </div>
 <div class="actions" mat-dialog-actions>
-  <button mat-flat-button color="primary" mat-dialog-close (click)="login()">
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="!loginForm.valid"
+    mat-dialog-close
+    (click)="login()"
+  >
     Log In
   </button>
 </div>
