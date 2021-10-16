@@ -1,0 +1,16 @@
+section {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin: 20px;
+}
+
+mat-form-field {
+  padding: 0 5px;
+}
+
+button {
+  width: 120px;
+  margin: 0 5px;
+}

@@ -104,10 +104,10 @@ router.get("/all", (req, res) => {
 });
 
 router.put("/update", (req, res) => {
-  const { _id, username, password } = req.body;
+  const { username, password } = req.body;
   User.findOneAndUpdate(
-    { _id },
-    { username, password: md5Password(password) },
+    { username },
+    { password: md5Password(password) },
     (err, doc) => {
       if (!doc) {
         return res.json({ code: 1 });
@@ -117,10 +117,11 @@ router.put("/update", (req, res) => {
   );
 });
 
-router.delete("/delete", (req, res) => {
-  const { _id } = req.body;
-  User.findOneAndDelete({ _id }, (err, doc) => {
-    Record.deleteMany({ user: _id }, (err, doc) => {
+router.delete("/delete/:id", (req, res) => {
+  const userId = req.params.id;
+  User.findOneAndDelete({ _id: userId }, (err, doc) => {
+    if (!doc) return res.json({ code: 1 });
+    Record.deleteMany({ user: userId }, (err, doc) => {
       return res.json({ code: 0 });
     });
   });

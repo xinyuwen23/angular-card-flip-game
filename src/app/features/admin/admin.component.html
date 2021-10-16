@@ -1,1 +1,10 @@
-<p>admin works!</p>
+<section>
+  <app-register (register)="addUser($event)"></app-register>
+  <mat-card *ngFor="let user of users">
+    <app-user
+      [user]="user"
+      (update)="updateUser($event)"
+      (delete)="deleteUser($event)"
+    ></app-user>
+  </mat-card>
+</section>

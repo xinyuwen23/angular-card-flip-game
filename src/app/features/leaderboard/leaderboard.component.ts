@@ -21,8 +21,13 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
   constructor(private auth: AuthService, private lb: LeaderboardService) {}
 
   ngOnInit(): void {
+    this.allRecordsSubscription = this.lb.allRecords$.subscribe(
+      (allRecords) => (this.allRecords = allRecords)
+    );
+    this.userRecordsSubscription = this.lb.userRecords$.subscribe(
+      (userRecords) => (this.userRecords = userRecords)
+    );
     this.getAllRecords();
-    this.getUserRecords();
   }
 
   ngOnDestroy() {
@@ -33,16 +38,6 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
   getAllRecords() {
     this.lb.getAllRecords$().subscribe((data) => {
       this.lb.allRecords$.next(data.records);
-      this.allRecordsSubscription = this.allRecordsSubscription =
-        this.lb.allRecords$.subscribe(
-          (allRecords) => (this.allRecords = allRecords)
-        );
     });
-  }
-
-  getUserRecords() {
-    this.userRecordsSubscription = this.lb.userRecords$.subscribe(
-      (userRecords) => (this.userRecords = userRecords)
-    );
   }
 }

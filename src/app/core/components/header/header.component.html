@@ -5,7 +5,14 @@
     <button mat-button color="primary" routerLink="/leaderboard">
       Leaderboard
     </button>
-    <button mat-button color="primary" routerLink="/admin">Management</button>
+    <button
+      mat-button
+      color="primary"
+      routerLink="/admin"
+      *ngIf="user?.isAdmin"
+    >
+      Management
+    </button>
   </section>
   <section class="right" *ngIf="!user">
     <button mat-button color="primary" (click)="openRegisterDialog()">
