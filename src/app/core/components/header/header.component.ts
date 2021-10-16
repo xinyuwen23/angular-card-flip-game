@@ -11,7 +11,7 @@ import { LeaderboardService } from '../../services/leaderboard.service';
 export class HeaderComponent implements OnInit {
   user?: User;
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private lb: LeaderboardService) {}
 
   ngOnInit(): void {
     this.getUser();
@@ -20,7 +20,12 @@ export class HeaderComponent implements OnInit {
   getUser() {
     this.auth.getUser$().subscribe((data) => {
       this.auth.user$.next(data.user);
-      this.user = this.auth.user$.getValue();
+      this.auth.user$.subscribe((user) => {
+        this.user = user;
+        this.lb
+          .getUserRecords$(user?._id)
+          .subscribe((data) => this.lb.userRecords$.next(data.records));
+      });
     });
   }
 

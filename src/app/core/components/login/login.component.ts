@@ -24,9 +24,11 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.auth.login$(this.loginForm.value).subscribe((data) => {
-      console.log(data.user);
       this.auth.user$.next(data.user);
       this.auth.setSession(data);
+      this.lb
+        .getUserRecords$(data.user._id)
+        .subscribe((data) => this.lb.userRecords$.next(data.records));
     });
   }
 }

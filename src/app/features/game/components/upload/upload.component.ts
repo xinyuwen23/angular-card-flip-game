@@ -30,8 +30,10 @@ export class UploadComponent implements OnInit, OnDestroy {
   }
 
   upload() {
-    this.game.upload$(this.user._id).subscribe((_) => {
-      this.lb.subscribeRecords(this.user._id);
+    this.game.upload$(this.user._id).subscribe(() => {
+      this.lb
+        .getUserRecords$(this.user._id)
+        .subscribe((data) => this.lb.userRecords$.next(data.records));
     });
   }
 }
