@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { GameService } from 'src/app/core/services/game.service';
 import { LeaderboardService } from 'src/app/core/services/leaderboard.service';
@@ -9,9 +8,8 @@ import { LeaderboardService } from 'src/app/core/services/leaderboard.service';
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.css'],
 })
-export class UploadComponent implements OnInit, OnDestroy {
+export class UploadComponent implements OnInit {
   user: any;
-  userSubscription?: Subscription;
 
   constructor(
     public game: GameService,
@@ -20,13 +18,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.userSubscription = this.auth.user$.subscribe(
-      (user) => (this.user = user)
-    );
-  }
-
-  ngOnDestroy() {
-    this.userSubscription?.unsubscribe();
+    this.user = this.auth.user$.getValue();
   }
 
   upload() {
