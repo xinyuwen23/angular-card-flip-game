@@ -24,23 +24,42 @@ export class AuthService {
     this.dialog.open(RegisterComponent);
   }
 
-  getUser$(): Observable<any> {
-    return this.http.get([environment.baseUrl, 'user/get'].join('/'));
+  getUser$(): Observable<{ code: number; user?: User }> {
+    return this.http.get<{ code: number; user?: User }>(
+      [environment.baseUrl, 'user/get'].join('/')
+    );
   }
 
-  login$(user: any): Observable<any> {
-    return this.http.post([environment.baseUrl, 'user/login'].join('/'), user);
+  login$(user: { username: string; password: string }): Observable<{
+    code: number;
+    user?: User;
+    idToken?: any;
+    expiresIn?: any;
+  }> {
+    return this.http.post<{
+      code: number;
+      user?: User;
+      idToken?: any;
+      expiresIn?: any;
+    }>([environment.baseUrl, 'user/login'].join('/'), user);
   }
 
-  register$(user: any): Observable<any> {
+  register$(user: { username: string; password: string }): Observable<{
+    code: number;
+    user?: User;
+    idToken?: any;
+    expiresIn?: any;
+  }> {
     const newUser = {
       username: user.username,
       password: user.password,
     };
-    return this.http.post(
-      [environment.baseUrl, 'user/register'].join('/'),
-      newUser
-    );
+    return this.http.post<{
+      code: number;
+      user?: User;
+      idToken?: any;
+      expiresIn?: any;
+    }>([environment.baseUrl, 'user/register'].join('/'), newUser);
   }
 
   logout() {
@@ -49,7 +68,12 @@ export class AuthService {
     localStorage.removeItem('expires_at');
   }
 
-  setSession(data: any) {
+  setSession(data: {
+    code: number;
+    user?: User;
+    idToken?: any;
+    expiresIn?: any;
+  }) {
     const expiresAt = moment().add(data.expiresIn, 'second');
     localStorage.setItem('id_token', data.idToken);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));

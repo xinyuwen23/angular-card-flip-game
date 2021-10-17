@@ -55,10 +55,7 @@ router.post("/login", (req, res) => {
   const { username, password } = req.body;
   User.findOne({ username, password: md5Password(password) }, (err, doc) => {
     if (!doc) {
-      return res.json({
-        code: 1,
-        message: "wrong password",
-      });
+      return res.json({ code: 1 });
     }
     const userId = doc._id.toString();
     const jwtBearerToken = createJwtToken(userId);

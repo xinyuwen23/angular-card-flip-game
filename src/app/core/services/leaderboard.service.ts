@@ -12,13 +12,20 @@ export class LeaderboardService {
 
   constructor(private http: HttpClient) {}
 
-  getUserRecords$(userId: string | undefined): Observable<any> {
-    return this.http.post([environment.baseUrl, 'record/user'].join('/'), {
-      _id: userId,
-    });
+  getUserRecords$(
+    userId: string | undefined
+  ): Observable<{ code: number; records: any }> {
+    return this.http.post<{ code: number; records: any }>(
+      [environment.baseUrl, 'record/user'].join('/'),
+      {
+        _id: userId,
+      }
+    );
   }
 
-  getAllRecords$(): Observable<any> {
-    return this.http.get([environment.baseUrl, 'record/all'].join('/'));
+  getAllRecords$(): Observable<{ code: number; records: any }> {
+    return this.http.get<{ code: number; records: any }>(
+      [environment.baseUrl, 'record/all'].join('/')
+    );
   }
 }
