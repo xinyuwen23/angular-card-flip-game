@@ -30,7 +30,7 @@ export class AuthService {
     );
   }
 
-  login$(user: { username: string; password: string }): Observable<{
+  login(user: { username: string; password: string }): Observable<{
     code: number;
     user?: User;
     idToken?: any;
@@ -44,7 +44,7 @@ export class AuthService {
     }>([environment.baseUrl, 'user/login'].join('/'), user);
   }
 
-  register$(user: { username: string; password: string }): Observable<{
+  register(user: { username: string; password: string }): Observable<{
     code: number;
     user?: User;
     idToken?: any;

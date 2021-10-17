@@ -17,7 +17,7 @@ export class GameService {
     this.dialog.open(UploadComponent);
   }
 
-  upload$(userId: string): Observable<{ code: number; record: any }> {
+  upload(userId: string): Observable<{ code: number; record: any }> {
     return this.http.post<{ code: number; record: any }>(
       [environment.baseUrl, 'record/upload'].join('/'),
       {

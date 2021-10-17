@@ -31,24 +31,36 @@ export class AdminComponent implements OnInit, OnDestroy {
       .subscribe((data) => this.admin.users$.next(data.users));
   }
 
-  addUser(user: any) {
-    this.admin.addUser(user).subscribe((_) => {
-      this.getUsers();
-      this.message.openSnackBar('User added', 'Close');
+  addUser(user: { username: string; password: string }) {
+    this.admin.addUser(user).subscribe((data) => {
+      if (data.user) {
+        this.getUsers();
+        this.message.openSnackBar('User added', 'Close');
+      } else {
+        this.message.openSnackBar('Username has been taken', 'Close');
+      }
     });
   }
 
-  updateUser(user: any) {
-    this.admin.updateUser(user).subscribe((_) => {
-      this.getUsers();
-      this.message.openSnackBar('User updated', 'Close');
+  updateUser(user: { _id: string; username?: string; password?: string }) {
+    this.admin.updateUser(user).subscribe((data) => {
+      if (data.code === 0) {
+        this.getUsers();
+        this.message.openSnackBar('User updated', 'Close');
+      } else {
+        this.message.openSnackBar('Update failed', 'Close');
+      }
     });
   }
 
   deleteUser(userId: string) {
-    this.admin.deleteUser(userId).subscribe((_) => {
-      this.getUsers();
-      this.message.openSnackBar('User deleted', 'Close');
+    this.admin.deleteUser(userId).subscribe((data) => {
+      if (data.code === 0) {
+        this.getUsers();
+        this.message.openSnackBar('User deleted', 'Close');
+      } else {
+        this.message.openSnackBar("User doesn't exist", 'Close');
+      }
     });
   }
 }

@@ -28,10 +28,14 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   register() {
-    this.auth.register$(this.registerForm.value).subscribe((data) => {
-      this.auth.user$.next(data.user);
-      this.auth.setSession(data);
-      this.message.openSnackBar('Welcome', 'Close');
+    this.auth.register(this.registerForm.value).subscribe((data) => {
+      if (data.user) {
+        this.auth.user$.next(data.user);
+        this.auth.setSession(data);
+        this.message.openSnackBar('Welcome', 'Close');
+      } else {
+        this.message.openSnackBar('Username has been taken', 'Close');
+      }
     });
   }
 }

@@ -38,8 +38,8 @@ export class GameComponent implements OnInit {
     return cards;
   }
 
-  createInitCards(cards: any): Card[] {
-    return cards.map((card: any) => ({
+  createInitCards(cards: { id: number; name: string }[]): Card[] {
+    return cards.map((card: { id: number; name: string }) => ({
       ...card,
       flipped: false,
       matched: false,

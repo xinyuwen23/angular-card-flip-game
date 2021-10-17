@@ -23,10 +23,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
-    this.auth.login$(this.loginForm.value).subscribe((data) => {
-      this.auth.user$.next(data.user);
-      this.auth.setSession(data);
-      this.message.openSnackBar('Welcome', 'Close');
+    this.auth.login(this.loginForm.value).subscribe((data) => {
+      if (data.user) {
+        this.auth.user$.next(data.user);
+        this.auth.setSession(data);
+        this.message.openSnackBar('Welcome', 'Close');
+      } else {
+        this.message.openSnackBar('Wrong password', 'Close');
+      }
     });
   }
 }

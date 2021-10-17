@@ -24,7 +24,7 @@ export class UploadComponent implements OnInit {
   }
 
   upload() {
-    this.game.upload$(this.user._id).subscribe(() => {
+    this.game.upload(this.user._id).subscribe(() => {
       this.lb.getUserRecords$(this.user._id).subscribe((data) => {
         this.lb.userRecords$.next(data.records);
         this.message.openSnackBar('Record submitted', 'Awesome!');
