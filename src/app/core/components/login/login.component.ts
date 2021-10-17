@@ -10,8 +10,8 @@ import { LeaderboardService } from '../../services/leaderboard.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = this.fb.group({
-    username: this.fb.control('', [Validators.required]),
-    password: this.fb.control('', [Validators.required]),
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]],
   });
 
   constructor(

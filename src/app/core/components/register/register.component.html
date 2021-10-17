@@ -31,7 +31,13 @@
   </mat-form-field>
 </div>
 <div class="actions" mat-dialog-actions>
-  <button mat-flat-button color="primary" mat-dialog-close (click)="register()">
+  <button
+    mat-flat-button
+    color="primary"
+    mat-dialog-close
+    [disabled]="!registerForm.valid"
+    (click)="register()"
+  >
     Register
   </button>
 </div>

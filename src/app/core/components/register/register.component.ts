@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { confirmedValidator } from 'src/app/shared/validators/confirmed.validator';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -8,11 +9,14 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup = this.fb.group({
-    username: this.fb.control('', [Validators.required]),
-    password: this.fb.control('', [Validators.required]),
-    password2: this.fb.control('', [Validators.required]),
-  });
+  registerForm: FormGroup = this.fb.group(
+    {
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      password2: ['', [Validators.required]],
+    },
+    { validator: confirmedValidator('password', 'password2') }
+  );
 
   constructor(private auth: AuthService, private fb: FormBuilder) {}
 
