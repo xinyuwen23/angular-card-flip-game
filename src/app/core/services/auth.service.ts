@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, Observable } from 'rxjs';
 import * as moment from 'moment';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from 'src/app/shared/interfaces/user';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from '../components/register/register.component';
-import { User } from 'src/app/shared/interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -32,10 +32,6 @@ export class AuthService {
     return this.http.post([environment.baseUrl, 'user/login'].join('/'), user);
   }
 
-  autoLogin() {
-    
-  }
-
   register$(user: any): Observable<any> {
     const newUser = {
       username: user.username,
@@ -57,19 +53,5 @@ export class AuthService {
     const expiresAt = moment().add(data.expiresIn, 'second');
     localStorage.setItem('id_token', data.idToken);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
-  }
-
-  isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
-  }
-
-  isLoggedOut() {
-    return !this.isLoggedIn();
-  }
-
-  getExpiration() {
-    const expiration: any = localStorage.getItem('expires_at');
-    const expiresAt = JSON.parse(expiration);
-    return moment(expiresAt);
   }
 }
