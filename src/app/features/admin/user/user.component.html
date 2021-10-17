@@ -3,7 +3,21 @@
   <p><strong>Username:</strong> {{ user.username }}</p>
   <p><strong>Encoded Password:</strong> {{ user.password }}</p>
 </div>
-<div class="update" [formGroup]="updateForm">
+<div class="update" [formGroup]="updateUsernameForm">
+  <mat-form-field appearance="fill">
+    <mat-label>New Username</mat-label>
+    <input matInput formControlName="username" />
+  </mat-form-field>
+  <button
+    mat-button
+    color="primary"
+    (click)="clickUpdateUsername()"
+    [disabled]="!updateUsernameForm.valid"
+  >
+    Update Username
+  </button>
+</div>
+<div class="update" [formGroup]="updatePasswordForm">
   <mat-form-field appearance="fill">
     <mat-label>New Password</mat-label>
     <input matInput type="password" formControlName="password" />
@@ -11,8 +25,8 @@
   <button
     mat-button
     color="primary"
-    (click)="clickUpdate()"
-    [disabled]="!updateForm.valid"
+    (click)="clickUpdatePassword()"
+    [disabled]="!updatePasswordForm.valid"
   >
     Update Password
   </button>

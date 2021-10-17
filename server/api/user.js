@@ -104,17 +104,28 @@ router.get("/all", (req, res) => {
 });
 
 router.put("/update", (req, res) => {
-  const { username, password } = req.body;
-  User.findOneAndUpdate(
-    { username },
-    { password: md5Password(password) },
-    (err, doc) => {
+  const { _id, username, password } = req.body;
+  if (!username) {
+    User.findOneAndUpdate(
+      { _id },
+      { password: md5Password(password) },
+      (err, doc) => {
+        if (!doc) {
+          return res.json({ code: 1 });
+        }
+        return res.json({ code: 0 });
+      }
+    );
+  } else if (!password) {
+    User.findOneAndUpdate({ _id }, { username }, (err, doc) => {
       if (!doc) {
         return res.json({ code: 1 });
       }
       return res.json({ code: 0 });
-    }
-  );
+    });
+  } else {
+    return res.json({ code: 1 });
+  }
 });
 
 router.delete("/delete/:id", (req, res) => {

@@ -1,11 +1,11 @@
 <section [formGroup]="registerForm">
   <mat-form-field appearance="fill">
     <mat-label>Username</mat-label>
-    <input matInput formControlName="username" />
+    <input matInput formControlName="username" required />
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Password</mat-label>
-    <input matInput type="password" formControlName="password" />
+    <input matInput type="password" formControlName="password" required />
   </mat-form-field>
   <button
     mat-raised-button

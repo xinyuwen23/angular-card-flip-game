@@ -9,6 +9,10 @@ section {
 }
 
 mat-card {
-  max-width: 1000px;
+  max-width: 1050px;
   margin: 20px auto;
+}
+
+h1 {
+  text-align: center;
 }
