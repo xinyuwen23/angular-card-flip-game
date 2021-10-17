@@ -118,7 +118,12 @@ router.put("/update", (req, res) => {
       if (!doc) {
         return res.json({ code: 1 });
       }
-      return res.json({ code: 0 });
+      User.findOne({ username }, (err, doc) => {
+        if (doc) {
+          return res.json({ code: 1 });
+        }
+        return res.json({ code: 0 });
+      });
     });
   } else {
     return res.json({ code: 1 });
