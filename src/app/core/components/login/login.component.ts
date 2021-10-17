@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { LeaderboardService } from '../../services/leaderboard.service';
 import { MessageService } from '../../services/message.service';
 
 @Component({
@@ -18,7 +17,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
-    private lb: LeaderboardService,
     private message: MessageService
   ) {}
 

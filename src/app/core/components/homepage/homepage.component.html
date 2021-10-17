@@ -1,9 +1,14 @@
 <section class="title">
   <h1>FLIP CARD GAME</h1>
 </section>
-<section class="buttons">
+<section class="buttons" *ngIf="user">
   <button mat-flat-button color="primary" routerLink="/game">PLAY</button>
   <button mat-stroked-button color="primary" routerLink="/leaderboard">
     LEADERBOARD
+  </button>
+</section>
+<section class="buttons" *ngIf="!user">
+  <button mat-flat-button color="primary" (click)="openLoginDialog()">
+    LOG IN
   </button>
 </section>
