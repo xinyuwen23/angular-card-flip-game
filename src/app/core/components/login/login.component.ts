@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { LeaderboardService } from '../../services/leaderboard.service';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
-    private lb: LeaderboardService
+    private lb: LeaderboardService,
+    private message: MessageService
   ) {}
 
   ngOnInit(): void {}
@@ -26,9 +28,7 @@ export class LoginComponent implements OnInit {
     this.auth.login$(this.loginForm.value).subscribe((data) => {
       this.auth.user$.next(data.user);
       this.auth.setSession(data);
-      this.lb
-        .getUserRecords$(data.user._id)
-        .subscribe((data) => this.lb.userRecords$.next(data.records));
+      this.message.openSnackBar('Welcome', 'Close');
     });
   }
 }

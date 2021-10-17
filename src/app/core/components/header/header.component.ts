@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/interfaces/user';
 import { AuthService } from '../../services/auth.service';
 import { LeaderboardService } from '../../services/leaderboard.service';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,11 @@ import { LeaderboardService } from '../../services/leaderboard.service';
 export class HeaderComponent implements OnInit {
   user?: User;
 
-  constructor(private auth: AuthService, private lb: LeaderboardService) {}
+  constructor(
+    private auth: AuthService,
+    private lb: LeaderboardService,
+    private message: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.auth.user$.subscribe((user) => {
@@ -39,5 +44,6 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.auth.logout();
+    this.message.openSnackBar('Logged out', 'Close');
   }
 }

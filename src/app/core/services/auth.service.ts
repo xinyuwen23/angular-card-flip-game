@@ -32,6 +32,10 @@ export class AuthService {
     return this.http.post([environment.baseUrl, 'user/login'].join('/'), user);
   }
 
+  autoLogin() {
+    
+  }
+
   register$(user: any): Observable<any> {
     const newUser = {
       username: user.username,

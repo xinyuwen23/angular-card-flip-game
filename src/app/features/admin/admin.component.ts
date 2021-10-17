@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/core/services/admin.service';
+import { MessageService } from 'src/app/core/services/message.service';
 
 @Component({
   selector: 'app-admin',
@@ -11,7 +12,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   users: any;
   usersSubscription?: Subscription;
 
-  constructor(private admin: AdminService) {}
+  constructor(private admin: AdminService, private message: MessageService) {}
 
   ngOnInit(): void {
     this.usersSubscription = this.admin.users$.subscribe((users) => {
@@ -31,14 +32,23 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   addUser(user: any) {
-    this.admin.addUser(user).subscribe((_) => this.getUsers());
+    this.admin.addUser(user).subscribe((_) => {
+      this.getUsers();
+      this.message.openSnackBar('User added', 'Close');
+    });
   }
 
   updateUser(user: any) {
-    this.admin.updateUser(user).subscribe((_) => this.getUsers());
+    this.admin.updateUser(user).subscribe((_) => {
+      this.getUsers();
+      this.message.openSnackBar('User updated', 'Close');
+    });
   }
 
   deleteUser(userId: string) {
-    this.admin.deleteUser(userId).subscribe((_) => this.getUsers());
+    this.admin.deleteUser(userId).subscribe((_) => {
+      this.getUsers();
+      this.message.openSnackBar('User deleted', 'Close');
+    });
   }
 }
