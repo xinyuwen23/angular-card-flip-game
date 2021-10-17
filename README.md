@@ -1,6 +1,6 @@
 # Angular Card Flip Game
 
-This Angular project was developed by `Xinyu Wen` for Antra evaluation project. 
+This Angular project was developed by `Xinyu Wen` for Antra evaluation project.
 
 ## Installation and Setup Instructions
 
@@ -18,4 +18,12 @@ To Visit App:
 
 `localhost:4200`
 
+## User Accounts for demo
 
+### Admin
+
+username: `admin`, password: `admin`
+
+### User
+
+usernameL `test`, password: `test`
