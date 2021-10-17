@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -9,8 +9,8 @@ import { FormBuilder } from '@angular/forms';
 export class RegisterComponent implements OnInit {
   @Output() register = new EventEmitter();
   registerForm = this.fb.group({
-    username: '',
-    password: '',
+    username: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
   constructor(private fb: FormBuilder) {}

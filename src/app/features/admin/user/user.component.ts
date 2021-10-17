@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
@@ -11,7 +11,7 @@ export class UserComponent implements OnInit {
   @Output() update = new EventEmitter();
   @Output() delete = new EventEmitter();
   updateForm = this.fb.group({
-    password: '',
+    password: ['', Validators.required],
   });
 
   constructor(private fb: FormBuilder) {}

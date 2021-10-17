@@ -2,32 +2,15 @@
 <div class="content" mat-dialog-content [formGroup]="registerForm">
   <mat-form-field>
     <mat-label>Username</mat-label>
-    <input
-      matInput
-      formControlName="username"
-      required
-      (keyup.enter)="register()"
-    />
+    <input matInput formControlName="username" required />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Password</mat-label>
-    <input
-      matInput
-      type="password"
-      formControlName="password"
-      required
-      (keyup.enter)="register()"
-    />
+    <input matInput type="password" formControlName="password" required />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Confirm Password</mat-label>
-    <input
-      matInput
-      type="password"
-      formControlName="password2"
-      required
-      (keyup.enter)="register()"
-    />
+    <input matInput type="password" formControlName="password2" required />
   </mat-form-field>
 </div>
 <div class="actions" mat-dialog-actions>
