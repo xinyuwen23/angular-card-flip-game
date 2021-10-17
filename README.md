@@ -1,4 +1,4 @@
-# AngularCardFlipGame
+# Angular Card Flip Game
 
 This Angular project was developed by `Xinyu Wen` for Antra evaluation project. 
 
