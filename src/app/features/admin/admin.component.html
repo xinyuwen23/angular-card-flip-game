@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="user?.isAdmin">
   <h1>Register User</h1>
   <app-register (register)="addUser($event)"></app-register>
   <h1>User List</h1>

@@ -114,14 +114,11 @@ router.put("/update", (req, res) => {
       }
     );
   } else if (!password) {
-    User.findOneAndUpdate({ _id }, { username }, (err, doc) => {
-      if (!doc) {
+    User.findOne({ username }, (err, doc) => {
+      if (doc) {
         return res.json({ code: 1 });
       }
-      User.findOne({ username }, (err, doc) => {
-        if (doc) {
-          return res.json({ code: 1 });
-        }
+      User.findOneAndUpdate({ _id }, { username }, (err, user) => {
         return res.json({ code: 0 });
       });
     });

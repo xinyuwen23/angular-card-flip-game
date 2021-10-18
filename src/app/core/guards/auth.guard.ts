@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
+import jwt_decode from 'jwt-decode';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { MessageService } from '../services/message.service';
@@ -13,10 +15,11 @@ import { MessageService } from '../services/message.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  errorMessage = 'You must log in first';
-  actionMessage = 'Got it';
-
-  constructor(private auth: AuthService, private message: MessageService) {}
+  constructor(
+    private auth: AuthService,
+    private message: MessageService,
+    private route: Router
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -26,8 +29,14 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.auth.user$.getValue()) return true;
-    this.message.openSnackBar(this.errorMessage, this.actionMessage);
-    return false;
+    const token = localStorage.getItem('id_token');
+    if (token) {
+      const decodedToken = jwt_decode(token) as any;
+      return !!decodedToken.sub;
+    } else {
+      this.message.openSnackBar('You must log in first', 'Close');
+      this.route.navigate(['/']);
+      return false;
+    }
   }
 }

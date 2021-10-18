@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/core/services/admin.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { MessageService } from 'src/app/core/services/message.service';
+import { User } from 'src/app/shared/interfaces/user';
 
 @Component({
   selector: 'app-admin',
@@ -11,10 +13,19 @@ import { MessageService } from 'src/app/core/services/message.service';
 export class AdminComponent implements OnInit, OnDestroy {
   users: any;
   usersSubscription?: Subscription;
+  user?: User;
+  userSubscription?: Subscription;
 
-  constructor(private admin: AdminService, private message: MessageService) {}
+  constructor(
+    private admin: AdminService,
+    private message: MessageService,
+    private auth: AuthService
+  ) {}
 
   ngOnInit(): void {
+    this.userSubscription = this.auth.user$.subscribe(
+      (user) => (this.user = user)
+    );
     this.usersSubscription = this.admin.users$.subscribe((users) => {
       this.users = users;
     });
