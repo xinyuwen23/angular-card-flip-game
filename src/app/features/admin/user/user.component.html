@@ -9,7 +9,7 @@
     <input matInput formControlName="username" />
   </mat-form-field>
   <button
-    mat-button
+    mat-stroked-button
     color="primary"
     (click)="clickUpdateUsername()"
     [disabled]="!updateUsernameForm.valid"
@@ -23,7 +23,7 @@
     <input matInput type="password" formControlName="password" />
   </mat-form-field>
   <button
-    mat-button
+    mat-stroked-button
     color="primary"
     (click)="clickUpdatePassword()"
     [disabled]="!updatePasswordForm.valid"
@@ -32,7 +32,7 @@
   </button>
 </div>
 <div class="delete">
-  <button mat-stroked-button color="warn" (click)="clickDelete()">
+  <button mat-flat-button color="warn" (click)="clickDelete()">
     Delete User
   </button>
 </div>

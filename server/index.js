@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 
 const userRouter = require("./api/user");
 const recordRouter = require("./api/record");
@@ -8,6 +9,9 @@ const recordRouter = require("./api/record");
 const PORT = process.env.PORT || 4000;
 
 const app = express();
+
+const buildPath = path.join(__dirname, "..", "dist/angular-card-flip-game");
+app.use(express.static(buildPath));
 
 app.use(
   cors({
