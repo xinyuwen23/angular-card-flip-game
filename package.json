@@ -8,7 +8,7 @@
     "build": "ng build && (cd server && npm install)",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "client": "ng serve",
+    "client": "ng serve --proxy-config proxy.conf.json",
     "server": "nodemon server"
   },
   "private": true,

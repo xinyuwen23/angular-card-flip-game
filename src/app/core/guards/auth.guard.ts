@@ -7,6 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import jwt_decode from 'jwt-decode';
+import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { MessageService } from '../services/message.service';
@@ -32,7 +33,11 @@ export class AuthGuard implements CanActivate {
     const token = localStorage.getItem('id_token');
     if (token) {
       const decodedToken = jwt_decode(token) as any;
-      return !!decodedToken.sub;
+      if (decodedToken.sub && moment().isBefore(decodedToken.exp * 1000)) {
+        return true;
+      }
+      this.route.navigate(['/']);
+      return false;
     } else {
       this.message.openSnackBar('You must log in first', 'Close');
       this.route.navigate(['/']);

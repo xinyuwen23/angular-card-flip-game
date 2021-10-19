@@ -10,8 +10,8 @@ import { MessageService } from '../../services/message.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = this.fb.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    username: ['admin', [Validators.required]],
+    password: ['admin', [Validators.required]],
   });
 
   constructor(
