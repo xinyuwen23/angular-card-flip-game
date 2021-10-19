@@ -9,18 +9,13 @@ import {
 import jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service';
 import { MessageService } from '../services/message.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private auth: AuthService,
-    private message: MessageService,
-    private route: Router
-  ) {}
+  constructor(private message: MessageService, private route: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
