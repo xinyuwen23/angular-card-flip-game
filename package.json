@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently \"nodemon server\" \"ng serve\"",
+    "start": "cd server && npm start",
     "setup": "npm install && (cd server && npm install)",
     "build": "ng build && (cd server && npm install)",
     "watch": "ng build --watch --configuration development",
