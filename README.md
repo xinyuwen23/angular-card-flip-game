@@ -61,11 +61,6 @@ Open your browser and visit `http://localhost:4200/` to play the game.
 Feel free to submit issues or pull requests to improve this project!
 ```
 
-## License
-```md
-This project is licensed under the MIT License.
-```
-
 ---
 **Author:** [Xinyu Wen](https://github.com/xinyuwen23)
 
