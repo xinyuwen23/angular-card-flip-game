@@ -1,29 +1,70 @@
 # Angular Card Flip Game
 
-This Angular project was developed by `Xinyu Wen` for Antra evaluation project.
+## Overview
+This is a simple card-flipping memory game built using Angular. The game challenges players to find matching pairs of cards by flipping them over.
 
-## Installation and Setup Instructions
+## Features
+- Interactive card-flipping animation
+- Matching pair detection
+- Score tracking
+- Responsive design for different screen sizes
 
-Clone down this repository. You will need `node` and `npm` installed globally on your machine. This project uses `MongoDB Atlas`. You DO NOT need `mongodb` running locally.
+## Installation
+To run this project locally, follow these steps:
 
-Installation:
+### Prerequisites
+Make sure you have the following installed on your system:
+- [Node.js](https://nodejs.org/) (LTS version recommended)
+- [Angular CLI](https://angular.io/cli)
 
-`npm run setup`
+### Steps
+```sh
+# Clone the repository
+git clone https://github.com/xinyuwen23/angular-card-flip-game.git
 
-To Start App:
+# Navigate into the project directory
+cd angular-card-flip-game
 
-`npm start`
+# Install dependencies
+npm install
 
-To Visit App:
+# Start the development server
+ng serve
+```
 
-`localhost:4200`
+Open your browser and visit `http://localhost:4200/` to play the game.
 
-## User Accounts for demo
+## Usage
+```md
+- Click on a card to flip it over.
+- Try to find and match all pairs.
+- The game ends when all pairs are matched.
+- Timer keeps track of how long you take to complete the game.
+- Leaderboard stores the best scores.
+```
 
-### Admin
+## Technologies Used
+```md
+- Angular
+- TypeScript
+- HTML & CSS
+```
 
-username: `admin`, password: `admin`
+## Future Improvements
+```md
+- Add difficulty levels
+- Improve animations and UI design
+```
 
-### User
+## Contributing
+```md
+Feel free to submit issues or pull requests to improve this project!
+```
 
-usernameL `test`, password: `test`
+## License
+```md
+This project is licensed under the MIT License.
+```
+
+---
+**Author:** [Xinyu Wen](https://github.com/xinyuwen23)
